@@ -1,11 +1,94 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>HELLO HTML</title>
+    <title>Table with Buttons for Pages</title>
+    <style>
+        /* CSS for styling the table */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        button {
+            padding: 5px 10px;
+            margin: 5px;
+        }
+    </style>
 </head>
 <body>
-<h1>Hello HTML!<h1>
-	<h3>By Filip Koceski<h3>
+
+<!-- Table to display data -->
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>1</td>
+            <td>Filip</td>
+            <td>filip.koceski1@gmail.com</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>Vlatko</td>
+            <td>vlatko@gmail.com</td>
+        </tr>
+        <!-- Add more rows as needed -->
+    </tbody>
+</table>
+
+<!-- Buttons for navigating pages -->
+<button onclick="previousPage()">Previous</button>
+<button onclick="nextPage()">Next</button>
+
+<script>
+    // JavaScript for handling page navigation
+    var currentPage = 1;
+    var rowsPerPage = 2; // Change this value to adjust the number of rows per page
+    var totalRows = document.getElementsByTagName("tbody")[0].rows.length;
+    
+    function showRows() {
+        var rows = document.getElementsByTagName("tbody")[0].rows;
+        var startIndex = (currentPage - 1) * rowsPerPage;
+        var endIndex = startIndex + rowsPerPage;
+        for (var i = 0; i < rows.length; i++) {
+            if (i >= startIndex && i < endIndex) {
+                rows[i].style.display = "";
+            } else {
+                rows[i].style.display = "none";
+            }
+        }
+    }
+    
+    function previousPage() {
+        if (currentPage > 1) {
+            currentPage--;
+            showRows();
+        }
+    }
+    
+    function nextPage() {
+        var totalPages = Math.ceil(totalRows / rowsPerPage);
+        if (currentPage < totalPages) {
+            currentPage++;
+            showRows();
+        }
+    }
+    
+    // Show the initial page
+    showRows();
+</script>
+
 </body>
 </html>
